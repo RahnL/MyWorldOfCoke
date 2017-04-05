@@ -9,7 +9,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="header">A Map of Our Coke Collection</div>
         <!-- our map will go into this div -->
+
         <div></div>
 
         <script src="//d3js.org/d3.v3.min.js"></script>
@@ -45,7 +47,7 @@
             var svg = d3.select("div").append("svg")
                 .attr("width", width)
                 .attr("height", height);
-
+             
             svg.append("defs").append("path")
                 .datum({ type: "Sphere" })
                 .attr("id", "sphere")
@@ -102,7 +104,7 @@
             d3.select(self.frameElement).style("height", height + "px");
 
         </script>
-        <div id="footer"><a href="about.html">About</a></div>
+        <div class="footer"><a href="about.html">About</a></div>
     </form>
 </body>
 </html>

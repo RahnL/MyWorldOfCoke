@@ -126,4 +126,4 @@ d3.select(self.frameElement).style("height", height + "px");
 
 </script>
 
-<div id="footer"><a href="about.html">About</a></div>
+<div class="footer"><a href="about.html">About</a></div>
