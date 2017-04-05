@@ -5,47 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>My World of Coke Visualization</title>
-    <style>
-        body {
-            background: #fcfcfa;
-        }
-
-        .stroke {
-            fill: none;
-            stroke: #000;
-            stroke-width: 3px;
-        }
-
-        .fill {
-            fill: #fff;
-        }
-
-        .graticule {
-            fill: none;
-            stroke: #777;
-            stroke-width: .5px;
-            stroke-opacity: .5;
-        }
-
-        .land {
-            fill: #222;
-        }
-
-        .boundary {
-            fill: none;
-            stroke: #fff;
-            stroke-width: .5px;
-        }
-
-        div.tooltip {
-            color: #222;
-            background-color: blue;
-            padding: .5em;
-            border-radius: 2px;
-            opacity: 0.9;
-            position: absolute;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -135,14 +95,14 @@
                                 type = 'bottle';
                             }
                             var dt = elt[3];
-                            return c + "\nWe got a " + type + " from here on "+dt;
+                            return c + "\nWe got a " + type + " from here on " + dt;
                         });
                 });
             });
             d3.select(self.frameElement).style("height", height + "px");
 
         </script>
-
+        <div id="footer"><a href="about.html">About</a></div>
     </form>
 </body>
 </html>

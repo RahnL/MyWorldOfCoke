@@ -14,7 +14,9 @@ namespace Assignment10
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Get IP address, so we can geocode it to see where visitors are coming from.
+            // string clientIPAddress = HttpContext.Current.Request.UserHostAddress;
+            // Response.Write("// Hello "+clientIPAddress.ToString());
         }
 
         public void GetCountryData()
@@ -32,8 +34,8 @@ namespace Assignment10
                     foreach (DataRow r in dt.Rows)
                     {
                         // Look like this ['country124', 'Canada'],
-                        string s = string.Format("['c{0}', '{1}', '{2}','{3}'], \r\n", 
-                            r["ISOM49Code"], r["CountryName"], r["IsBottle"].ToString(), 
+                        string s = string.Format("['c{0}', '{1}', '{2}','{3}'], \r\n",
+                            r["ISOM49Code"], r["CountryName"], r["IsBottle"].ToString(),
                             DateTime.Parse(r["DateAquired"].ToString()).ToShortDateString());
                         Response.Write(s);
                     }

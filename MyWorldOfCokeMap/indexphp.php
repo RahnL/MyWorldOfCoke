@@ -1,39 +1,9 @@
 ﻿<!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-
-body {
-  background: #fcfcfa;
-}
-
-.stroke {
-  fill: none;
-  stroke: #000;
-  stroke-width: 3px;
-}
-
-.fill {
-  fill: #fff;
-}
-
-.graticule {
-  fill: none;
-  stroke: #777;
-  stroke-width: .5px;
-  stroke-opacity: .5;
-}
-
-.land {
-  fill: #222;
-}
-
-.boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
-
-</style>
+<head>
+<title>My World of Coke Visualization</title>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+</head>
 
 <body>
 <script src="//d3js.org/d3.v3.min.js"></script>
@@ -155,3 +125,5 @@ d3.json("/data/world-50m.json", function(error, world) {
 d3.select(self.frameElement).style("height", height + "px");
 
 </script>
+
+<div id="footer"><a href="about.html">About</a></div>

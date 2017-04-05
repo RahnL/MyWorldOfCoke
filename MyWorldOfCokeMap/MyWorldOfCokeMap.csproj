@@ -58,8 +58,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="about.html" />
     <Content Include="default.aspx" />
     <Content Include="SQL\SQLServer_CreateTables.sql" />
+    <Content Include="style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

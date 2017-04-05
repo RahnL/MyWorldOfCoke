@@ -20,7 +20,9 @@ CREATE TABLE [dbo].[Coke](
 )
 
 -- Insert into Coke table
--- No data given.  I did originally, but didn't save script.
+insert into coke values ('Latvia',1,'5/1/2000','From Vil','LVA',1)
+insert into coke values ('USA',1,'5/1/1995','Its so pretty','USA',1)
+
 
 
 -- This inserts country info.  
