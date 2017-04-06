@@ -29,9 +29,6 @@
             var width = 960,
                 height = 580;
 
-            var tooltip = d3.select('body').append('div')
-            .attr('class', 'hidden tooltip');
-
             var color = d3.scale.category10();
 
             var projection = d3.geo.kavrayskiy7()
@@ -47,7 +44,7 @@
             var svg = d3.select("div").append("svg")
                 .attr("width", width)
                 .attr("height", height);
-             
+
             svg.append("defs").append("path")
                 .datum({ type: "Sphere" })
                 .attr("id", "sphere")
@@ -65,7 +62,6 @@
                 .datum(graticule)
                 .attr("class", "graticule")
                 .attr("d", path);
-
 
             d3.json("/data/world-50m.json", function (error, world) {
                 if (error) throw error;
