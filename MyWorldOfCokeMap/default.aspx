@@ -11,7 +11,6 @@
     <form id="form1" runat="server">
         <div class="header">A Map of Our Coke Collection</div>
         <!-- our map will go into this div -->
-
         <div></div>
 
         <script src="//d3js.org/d3.v3.min.js"></script>
@@ -63,7 +62,7 @@
                 .attr("class", "graticule")
                 .attr("d", path);
 
-            d3.json("/data/world-50m.json", function (error, world) {
+            d3.json("data/world-50m.json", function (error, world) {
                 if (error) throw error;
 
                 var countries = topojson.feature(world, world.objects.countries).features,
