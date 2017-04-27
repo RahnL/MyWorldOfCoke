@@ -33,7 +33,7 @@
 
             var projection = d3.geo.kavrayskiy7()
                 .scale(170)
-                .translate([width / 2, height / 2.8])
+                .translate([width / 2, height / 3])
                 .precision(.1);
 
             var path = d3.geo.path()
@@ -83,55 +83,103 @@
                 //This loops through each element of our array from DB, and highlights it.               
 
                 data.forEach(function (elt, i) {
+                    console.log(elt[0] + ': ' + elt[1]);
+                    console.log(svg.select(elt[0]));
                     var colr = 'blue';
-                    var type = 'can';
                     if (elt[2] == 'True') {
                         colr = 'red';       //Bottles are Red!
-                        type = 'bottle';
                     }
+
                     svg.select('.' + elt[0]).attr('fill', colr)
-                        .append("svg:title")
+
                         .text(function (d) {
-                            var c = elt[1];                            
-                            var dt = elt[3];
+                            var c = elt[1];
+                            var type = 'can';
+                            if (elt[2] == 'True') {
+                                type = 'bottle';
+                            }
+                            var dt = elt[3];                           
+                            i.date = elt[3];
+
                             return c + "\nWe got a " + type + " from here on " + dt;
                         });
                 });
 
                 var dtMin = "1/1/1985";
                 var dtMax = "12/31/2013";
-
-                var format = d3.time.format("%d/%m/%Y");
+                
+                var format = d3.time.format("%d/%m/%Y");               
                 var startDate = format.parse(dtMin);
-                var endDate = format.parse(dtMax);              
+                var endDate = format.parse(dtMax); 
 
                 var x = d3.time.scale()
                     .domain([startDate, endDate])
                     .nice(d3.time.month)
-                    .range([100, width - 100]);                
-                
-                data.forEach(function (elt, i) {
-                    var m1 = elt[3];
-                    var x1 = x(format.parse(m1));
-                    var colr = 'blue';
-                    if (elt[2] == 'True') {
-                        colr = 'red';       //Bottles are Red!
-                    }
-                    svg.append("circle")
-                   .attr("r", 10)
-                   .attr("cx", function (d) { return x1; })
-                   .attr("cy", 700)
-                    .attr("fill", colr);
-
-                });
+                    .range([100, width - 100]); 
 
                 svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + (700) + ")")
+                //.attr("fill", 'grey')
                 .call(d3.svg.axis().scale(x).orient("bottom"));
 
+                data.forEach(function (elt, i) {
+                    var m1 = elt[3];                   
+                    var x1 = x(format.parse(m1));
+
+                    var colr = 'blue';
+                    if (elt[2] == 'True') {
+                        colr = 'red';       //Bottles are Red!
+                    }
+
+                    svg.append("circle")
+                       .attr("r", 8)
+                       .attr("cx", x1)
+                       .attr("cy", 700)
+                       .attr("fill", colr);
+
+                    svg.append("text")                      
+                        //.attr("x", function (d) { return x1; })
+                        //.attr("y", 680)                      
+                        .style("fill", "black")
+                        .style("font-size", "12px")                        
+                        .attr("dy", ".35em")
+                        .attr("text-anchor", "start")
+                        .attr("transform", "translate(" + x1 + ",690) rotate(-60)")
+                        .text(elt[1]);
+                });
+
+                svg.append("circle")
+                        .attr("r", 8)
+                        .attr("cx", 10)
+                        .attr("cy", 10)
+                        .attr("fill", 'red');
+                        
+                svg.append("text")                                    
+                        .style("fill", "black")
+                        .style("font-size", "12px")
+                        .attr("x", 20)
+                        .attr("y", 15)
+                        .text("Coke Bottle");
+
+                svg.append("circle")
+                       .attr("r", 8)
+                       .attr("cx", 10)
+                       .attr("cy", 30)
+                       .attr("fill", 'blue');
+
+                svg.append("text")
+                       .style("fill", "black")
+                       .style("font-size", "12px")
+                       .attr("x", 20)
+                       .attr("y", 35)
+                       .text("Coke Can");
+
+
+
             });
-             
+            d3.select(self.frameElement).style("height", height + "px");       
+                        
         </script>
         <div class="footer"><a href="about.html">About</a></div>
     </form>
