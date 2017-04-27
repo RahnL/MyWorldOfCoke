@@ -109,6 +109,21 @@
                     .domain([startDate, endDate])
                     .nice(d3.time.month)
                     .range([100, width - 100]);                
+                
+                data.forEach(function (elt, i) {
+                    var m1 = elt[3];
+                    var x1 = x(format.parse(m1));
+                    var colr = 'blue';
+                    if (elt[2] == 'True') {
+                        colr = 'red';       //Bottles are Red!
+                    }
+                    svg.append("circle")
+                   .attr("r", 10)
+                   .attr("cx", function (d) { return x1; })
+                   .attr("cy", 700)
+                    .attr("fill", colr);
+
+                });
 
                 svg.append("g")
                 .attr("class", "x axis")
