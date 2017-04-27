@@ -83,24 +83,17 @@
                 //This loops through each element of our array from DB, and highlights it.               
 
                 data.forEach(function (elt, i) {
-                    console.log(elt[0] + ': ' + elt[1]);
-                    console.log(svg.select(elt[0]));
                     var colr = 'blue';
+                    var type = 'can';
                     if (elt[2] == 'True') {
                         colr = 'red';       //Bottles are Red!
+                        type = 'bottle';
                     }
-
                     svg.select('.' + elt[0]).attr('fill', colr)
                         .append("svg:title")
                         .text(function (d) {
-                            var c = elt[1];
-                            var type = 'can';
-                            if (elt[2] == 'True') {
-                                type = 'bottle';
-                            }
-                            var dt = elt[3];                           
-                           
-
+                            var c = elt[1];                            
+                            var dt = elt[3];
                             return c + "\nWe got a " + type + " from here on " + dt;
                         });
                 });
@@ -115,20 +108,15 @@
                 var x = d3.time.scale()
                     .domain([startDate, endDate])
                     .nice(d3.time.month)
-                    .range([100, width - 100])
-                    .ticks(d3.time.years, 5)
-                    .tickFormat(d3.time.format("%I%p"));
+                    .range([100, width - 100]);                
 
                 svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + (700) + ")")
                 .call(d3.svg.axis().scale(x).orient("bottom"));
 
-
             });
-            d3.select(self.frameElement).style("height", height + "px");         
-
-            
+             
         </script>
         <div class="footer"><a href="about.html">About</a></div>
     </form>
