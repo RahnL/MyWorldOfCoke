@@ -108,7 +108,13 @@ d3.json("/data/world-50m.json", function(error, world) {
 	 data.forEach(function (elt, i) {
                     console.log(elt[0] + ': ' + elt[1]);
                     console.log(svg.select(elt[0]));
-                    svg.select('.' + elt[0]).attr('fill', 'red')
+					
+					var colr = 'blue';
+                     if (elt[2] == 'True') {
+                                colr = 'blue';
+                      }
+
+                    svg.select('.' + elt[0]).attr('fill', colr)
                         .append("svg:title")
                         .text(function (d) {
                             var c = elt[1];

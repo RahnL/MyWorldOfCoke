@@ -11,6 +11,7 @@
     <form id="form1" runat="server">
         <div class="header">A Map of Our Coke Collection</div>
         <!-- our map will go into this div -->
+
         <div></div>
 
         <script src="//d3js.org/d3.v3.min.js"></script>
@@ -26,13 +27,13 @@
 
         <script>
             var width = 960,
-                height = 580;
+                height = 900;
 
             var color = d3.scale.category10();
 
             var projection = d3.geo.kavrayskiy7()
                 .scale(170)
-                .translate([width / 2, height / 2])
+                .translate([width / 2, height / 2.8])
                 .precision(.1);
 
             var path = d3.geo.path()
@@ -62,7 +63,7 @@
                 .attr("class", "graticule")
                 .attr("d", path);
 
-            d3.json("data/world-50m.json", function (error, world) {
+            d3.json("/data/world-50m.json", function (error, world) {
                 if (error) throw error;
 
                 var countries = topojson.feature(world, world.objects.countries).features,
@@ -79,11 +80,17 @@
                   .attr("class", "boundary")
                   .attr("d", path);
 
-                //This loops through each element of our array from DB, and highlights it.
+                //This loops through each element of our array from DB, and highlights it.               
+
                 data.forEach(function (elt, i) {
                     console.log(elt[0] + ': ' + elt[1]);
                     console.log(svg.select(elt[0]));
-                    svg.select('.' + elt[0]).attr('fill', 'red')
+                    var colr = 'blue';
+                    if (elt[2] == 'True') {
+                        colr = 'red';       //Bottles are Red!
+                    }
+
+                    svg.select('.' + elt[0]).attr('fill', colr)
                         .append("svg:title")
                         .text(function (d) {
                             var c = elt[1];
@@ -91,13 +98,37 @@
                             if (elt[2] == 'True') {
                                 type = 'bottle';
                             }
-                            var dt = elt[3];
+                            var dt = elt[3];                           
+                           
+
                             return c + "\nWe got a " + type + " from here on " + dt;
                         });
                 });
-            });
-            d3.select(self.frameElement).style("height", height + "px");
 
+                var dtMin = "1/1/1985";
+                var dtMax = "12/31/2013";
+
+                var format = d3.time.format("%d/%m/%Y");
+                var startDate = format.parse(dtMin);
+                var endDate = format.parse(dtMax);              
+
+                var x = d3.time.scale()
+                    .domain([startDate, endDate])
+                    .nice(d3.time.month)
+                    .range([100, width - 100])
+                    .ticks(d3.time.years, 5)
+                    .tickFormat(d3.time.format("%I%p"));
+
+                svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + (700) + ")")
+                .call(d3.svg.axis().scale(x).orient("bottom"));
+
+
+            });
+            d3.select(self.frameElement).style("height", height + "px");         
+
+            
         </script>
         <div class="footer"><a href="about.html">About</a></div>
     </form>
