@@ -61,7 +61,7 @@
     <Content Include="about.html" />
     <Content Include="default.aspx" />
     <Content Include="SQL\SQLServer_CreateTables.sql" />
-    <Content Include="style.css" />
+    <Content Include="mapstyle.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\world-50m.json" />
-    <Content Include="indexphp.php" />
+    <Content Include="map.php" />
     <None Include="Properties\PublishProfiles\MyWorldOfCokeMap - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\MyWorldOfCokeMap - Web Deploy.pubxml" />
     <Content Include="Readme.md" />

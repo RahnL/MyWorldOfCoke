@@ -275,3 +275,28 @@ insert into CountryCodes values ('Western Sahara','EH','ESH','732')
 insert into CountryCodes values ('Yemen','YE','YEM','887')
 insert into CountryCodes values ('Zambia','ZM','ZMB','894')
 insert into CountryCodes values ('Zimbabwe','ZW','ZWE','716')
+
+
+
+-- Insert some values (For MySQL)
+insert into Coke (Country,IsBottle,DateAquired,Comments,CountryCode,Active)
+values
+	('USA',1,'2001-05-01 00:00:00','Alabama 2 Litter','USA',1),
+	('Israel',0,'1985-07-01 00:00:00',NULL,'ISR',1),
+	('Japan',0,'1996-01-01 00:00:00','Tall and skinny can','JPN',1),
+	('Japan',0,'1996-01-01 00:00:00','short can','JPN',1),
+	('Japan',0,'1996-01-01 00:00:00',NULL,'JPN',1),
+	('France',0,'1997-01-01 00:00:00',NULL,'FRA',1),
+	('Nepal',1,'1999-01-01 00:00:00',NULL,'NPL',1),
+	('Peru',1,'2012-05-01 00:00:00',NULL,'PER',1),
+	('Mexico',1,'2014-01-01 00:00:00',NULL,'MEX',1),
+	('Germany',1,'1995-01-01 00:00:00',NULL,'DEU',1),
+	('Egypt',1,'2000-01-01 00:00:00',NULL,'EGY',1),
+	('Hungary',1,'2002-01-01 00:00:00',NULL,'HUN',1),
+	('Poland',1,'1993-01-01 00:00:00',NULL,'POL',1),
+	('Thailand',1,'2011-01-01 00:00:00',NULL,'THA',1),
+	('Canada',1,'2001-10-01 00:00:00','From Dianna','CAN',1),
+	('Bermuda',1,'2004-01-01 00:00:00',NULL,'BMU',1),
+	('Latvia',1,'2003-08-01 00:00:00','From Vil','LVA',1),
+	('Turkey',0,'2007-04-01 00:00:00',NULL,'TUR',1),
+	('India',0,'2013-04-01 00:00:00','Not coke, because they don''t sell in india','IND',1)

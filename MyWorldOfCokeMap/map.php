@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <head>
 <title>My World of Coke Visualization</title>
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="mapstyle.css" media="screen" />
 </head>
 
 <body>
@@ -13,34 +13,40 @@
 <script>
 var data = [
 		<?php
+		
 		// pull data dynamically for styling and stuff.
-		$serverName = "rahnandmikevisualizationdb.database.windows.net";
-		$connectionOptions = array(
-			"Database" => "rahnandmikevisualization",
-			"Uid" => "rahnandmike",
-			"PWD" => "oW4evKHf36dI"
-			);
+		$serverName = "localhost";
+		$database= "";
+		$user = "";
+		$pw = "";
+		
 		//Establishes the connection
-		$conn = sqlsrv_connect($serverName, $connectionOptions);
-		$tsql = "select distinct cc.ISOM49Code, cc.CountryName, isBottle, DateAquired from coke c inner join countrycodes cc on c.countrycode = cc.ISOAlpha3Code where active = 1";  
-		$stmt = sqlsrv_query( $conn, $tsql);  
+		$conn = new mysqli($serverName, $user,$pw,$database);
+
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		$sql = "select distinct cc.ISOM49Code, cc.CountryName, isBottle, DateAquired from Coke c inner join CountryCodes cc on c.countrycode = cc.ISOAlpha3Code where active = 1";  
+		$result = $conn->query($sql);  
 		
 		// This is printing each row to the page.  Formatting is as part of a js array.
 		// Note the declaration right before the script starts and closing tag at end.
 		// format is like this:
 		//  [ 'country', 'column2', 'column3', etc..]
-		while ($row = sqlsrv_fetch_array($stmt)) {
-			echo ("['c".$row[0]);	// ID
-			echo ("','".$row[1]);	// CountryName
-			echo ("','".$row[2]);	// IsBottle
-			echo ("','".$row[3]->format('F j, Y'));	// DateAquired. See date format spec
-			echo ("',], \n");
+		if (mysqli_num_rows($result) > 0) {
+			 while($row = $result->fetch_assoc()) {
+				echo ("['c".$row["ISOM49Code"]);	// ID
+				echo ("','".$row["CountryName"]);	// CountryName
+				echo ("','".$row["isBottle"]);	// IsBottle
+				echo ("','".$row["DateAquired"]);
+				echo ("',], \n");
+			}
 		}
 		// Throw an extra line at the end to handle that trailing comma
 		echo ("['This will not be found','No value','',''] \n");
 		
-		sqlsrv_free_stmt( $stmt);  
-		sqlsrv_close( $conn);  
+		$conn->close();
 	?> ];
 </script>
 			
@@ -87,7 +93,7 @@ svg.append("path")
     .attr("d", path);
 
 	
-d3.json("/data/world-50m.json", function(error, world) {
+d3.json("world-50m.json", function(error, world) {
   if (error) throw error;
 
   var countries = topojson.feature(world, world.objects.countries).features,
