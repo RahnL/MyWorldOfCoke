@@ -1,5 +1,6 @@
 # MyWorldOfCoke
 This shows a visualization of countries of the world, where ones listed in a database are highlighted and given some info in a tooltip.
+The live, PHP version of the site is at http://myworldofcoke.com/map.php.
 
 Technologies:
 - Javascript
